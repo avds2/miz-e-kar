@@ -49,7 +49,7 @@ Dependencies: P1 persistence/access/event contracts and the preceding relevant m
 Allocated requirements (exhaustive):
 
 - [MK-AUTH-003](PARITY-MATRIX.md#mk-auth-003) — Account security, sessions and email verification.
-- [MK-WS-002](PARITY-MATRIX.md#mk-ws-002) — Workspace settings and ownership transfer.
+- [MK-WS-002](PARITY-MATRIX.md#mk-ws-002) — Workspace settings, ownership and deletion.
 - [MK-WS-004](PARITY-MATRIX.md#mk-ws-004) — Guest entry and identity restrictions.
 - [MK-WS-005](PARITY-MATRIX.md#mk-ws-005) — Guest module exceptions.
 - [MK-PR-002](PARITY-MATRIX.md#mk-pr-002) — Basic project settings and pinning.

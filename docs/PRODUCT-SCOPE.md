@@ -31,6 +31,7 @@ The source register lists exact URLs and inherited access dates. All discovered 
 | Topic | Public evidence | Treatment before implementation |
 | --- | --- | --- |
 | Free/base/advanced | Help footer broadly says all features are free; pricing differentiates base/advanced and a free base tier. | Treat footer as promotional; preserve advanced scope. Do not infer entitlements from it. |
+| Reference quotas | Pricing lists free base access for five users/150 MB and customer caps of 2,000 base versus 10,000 advanced. | Reference plan facts only; Miz-e Kar commercial model/default limits remain Q12. |
 | Gantt visibility | H052 says project managers only; H021 and pricing explicitly mention read-only member/guest access. | Keep both manage and view grants; obtain current advanced screen (Q02). |
 | Group/project member removal | H040 says creator-only; project settings and H045 describe managers managing members. | Capture action-specific policy; no blanket admin override inferred (Q02). |
 | Personal message deletion | H033 contains broad deletion language and a manager-only detail; H034 and tutorial H014 impose read-based restrictions. | Verify personal/group/channel separately (Q03). |

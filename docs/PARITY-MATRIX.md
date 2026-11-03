@@ -120,15 +120,15 @@ Evidence: **D** · Sources: [H025] [H004] · Reference plan: All · Delivery: **
 
 <a id="mk-ws-002"></a>
 
-### MK-WS-002 — Workspace settings and ownership transfer
+### MK-WS-002 — Workspace settings, ownership and deletion
 
 Evidence: **D** · Sources: [H026] · Reference plan: Both documented · Delivery: **P2**.
 
 - **Actor / preconditions:** Owner/admin for general settings; only owner for transfer; recipient already admin.
-- **Flow / observable result:** Edit workspace title/activity; inspect storage/plan; owner transfers ownership to existing admin.
-- **Fields / states / transitions:** Title, activity sector, owner, used/remaining storage.
+- **Flow / observable result:** Edit title/activity; inspect storage/plan; owner transfers to existing admin; free never-paid workspaces expose a deletion option.
+- **Fields / states / transitions:** Title, activity sector, owner, storage; free/previously-paid flag; deletion lifecycle unknown.
 - **Errors / edges / cross-effects:** No data loss on transfer; concurrent transfer/removal and rollback unknown.
-- **Acceptance criteria:** AC1: member cannot edit settings. AC2: non-admin target rejected; after transfer exactly one owner remains.
+- **Acceptance criteria:** AC1: member cannot edit settings. AC2: non-admin target rejected; after transfer exactly one owner remains. AC3: deletion option follows free/never-paid eligibility; deletion actor and recovery require evidence.
 - **Open questions:** Q02; unspecified validation, permission details and failures remain U.
 
 <a id="mk-ws-003"></a>
@@ -165,9 +165,9 @@ Evidence: **D** · Sources: [H111] [H114] · Reference plan: Advanced · Deliver
 
 - **Actor / preconditions:** Guest with per-resource membership/grants.
 - **Flow / observable result:** Collaborate in invited projects/customer records, receive assigned tasks/letters, use personal notes.
-- **Fields / states / transitions:** Guest can receive task without project membership; CRM/sales/finance grants; notes without labels.
+- **Fields / states / transitions:** Guest can receive task without project membership; CRM/sales/finance grants; no label creation anywhere or labels on notes; no message details/edit/forward/seen-list/copy/share controls.
 - **Errors / edges / cross-effects:** No private chats with guests even for owner; guest cannot create customers; guest activity can be monitored by authorized managers.
-- **Acceptance criteria:** AC1: guest DM and print routes deny access. AC2: assigned task is accessible without exposing the project. AC3: notes label action unavailable.
+- **Acceptance criteria:** AC1: guest DM and print routes deny access. AC2: assigned task is accessible without exposing the project. AC3: message-metadata/edit/forward/share and label actions unavailable. Guest letters preserve hidden sender identity unless introduced.
 - **Open questions:** Q02 Q06; unspecified validation, permission details and failures remain U.
 
 <a id="mk-ws-006"></a>
@@ -190,7 +190,7 @@ Evidence: **D** · Sources: [H029] [H012] · Reference plan: Base + advanced pol
 Evidence: **D** · Sources: [H031] [H012] · Reference plan: Advanced per pricing · Delivery: **P6**.
 
 - **Actor / preconditions:** Workspace owner exclusively; selected source/target members and resources.
-- **Flow / observable result:** Bulk grant/revoke CRM/project/group access; restore archived resources; substitute a departed worker.
+- **Flow / observable result:** Bulk grant/revoke CRM/project/group access for multiple users; filter by archived state/grouping; restore resources; substitute departed worker.
 - **Fields / states / transitions:** Selected projects/groups/customers; incomplete tasks; old/new member.
 - **Errors / edges / cross-effects:** Content/history retained; restored groups need members added again; historical release calls this admin access, current role article says owner.
 - **Acceptance criteria:** AC1: admin/member attempts denied. AC2: selected incomplete tasks/access move without rewriting prior authorship.
@@ -204,7 +204,7 @@ Evidence: **D** · Sources: [H028] [H026] [PRICE] · Reference plan: Free/base/a
 
 - **Actor / preconditions:** Owner/admin; workspace context.
 - **Flow / observable result:** Inspect current plan/remaining term and capacity; request trial, upgrade/renew and invoice/payment flow.
-- **Fields / states / transitions:** Reference trial seven days; storage/member/CRM caps; expiry; invoice/discount/payment status.
+- **Fields / states / transitions:** Trial seven days; activity-sector gift 15 days; free five users/150 MB; CRM base 2,000 vs advanced 10,000; expiry/invoice/discount/payment status.
 - **Errors / edges / cross-effects:** Advanced-to-base downgrade timing documented; provider/account/proration and self-host commercial model unresolved. No payment purchase attempted.
 - **Acceptance criteria:** AC1: plan transition retains data. AC2: capacity denial is explicit and consistent server-side. AC3: failed/unconfirmed payment cannot activate entitlement.
 - **Open questions:** Q12; unspecified validation, permission details and failures remain U.
@@ -599,8 +599,8 @@ Evidence: **D** · Sources: [H034] [H035] [H040] · Reference plan: Both; restri
 Evidence: **D** · Sources: [H033] [H034] [H024] · Reference plan: Both · Delivery: **P3**.
 
 - **Actor / preconditions:** Message author before read; workspace manager exception requires participation.
-- **Flow / observable result:** Send/reply/copy/format; inspect exact read times; edit unread message with Up Arrow; delete under permitted rule.
-- **Fields / states / transitions:** Sent/read receipts; author; reply target; bold/italic text.
+- **Flow / observable result:** Send/reply/copy/format/pin messages; inspect read times; edit unread message with Up Arrow; delete under permitted rule.
+- **Fields / states / transitions:** Sent/read receipts; author; reply target; bold/italic text; pinned-message marker.
 - **Errors / edges / cross-effects:** Read/edit race; personal deletion language conflicts; no broad manager access to private chats inferred.
 - **Acceptance criteria:** AC1: unread edit succeeds, read edit fails for ordinary author. AC2: unauthorized delete and stale-client edit rejected.
 - **Open questions:** Q03; unspecified validation, permission details and failures remain U.
@@ -985,10 +985,10 @@ Evidence: **D** · Sources: [H088] [H089] [H114] · Reference plan: Both; guests
 
 ### MK-NO-002 — Notes filters and lifecycle
 
-Evidence: **D** · Sources: [H090] [H091] [H092] · Reference plan: Both · Delivery: **P3**.
+Evidence: **D** · Sources: [H090] [H091] [H092] [H023] · Reference plan: Both · Delivery: **P3**.
 
 - **Actor / preconditions:** Note owner.
-- **Flow / observable result:** Filter all/label/archived/deleted; archive/delete/restore; permanently purge after 30 days in trash.
+- **Flow / observable result:** Search note text; filter all/label/archived/deleted; archive/delete/restore; permanently purge after 30 days in trash.
 - **Fields / states / transitions:** Active/archived/deleted/purged; label rename/color.
 - **Errors / edges / cross-effects:** Archive does not start deletion retention; purge boundary and backup-retention implications need definition.
 - **Acceptance criteria:** AC1: archived/deleted notes restore correctly before purge. AC2: note deleted 30 days ago becomes unrecoverable through application.

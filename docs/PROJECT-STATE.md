@@ -24,7 +24,7 @@ Deliverables: the requested ten Markdown files, including 87 stable requirement 
 
 ## Checks and publication
 
-Document audit passed: exactly ten Markdown documents, 87 unique requirements with required fields, all 87 phase allocations, 114 source anchors/mappings, 24 valid question IDs and working local links/anchors. All recorded source HTTP receipts were checked as 200. Manual review reconciled major plan/version and privacy conflicts. Publication is pending; see HANDOFF.md for the latest verified results. Application/unit/integration tests are not applicable because no application exists. The reference login browser inspection is not an application acceptance test and proves no authenticated parity.
+Document audit passed: exactly ten Markdown documents, 87 unique requirements with required fields, all 87 phase allocations, 114 source anchors/mappings, 24 valid question IDs and working local links/anchors. All recorded source HTTP receipts were checked as 200. Manual review reconciled major plan/version and privacy conflicts. Full staged whitespace check passed. Discovery commit `95a5d2cdab516e73b461316bea24f856d063f42a` was pushed successfully on `docs/phase-0-discovery`. Draft [PR #1](https://github.com/avds2/miz-e-kar/pull/1) is open against `main`, unmerged. A documentation follow-up records publication and final edge-case review; resolve the final branch head with `git rev-parse HEAD`. Application/unit/integration tests are not applicable because no application exists. The reference login browser inspection is not an application acceptance test and proves no authenticated parity.
 
 ## Next task and retained scope
 

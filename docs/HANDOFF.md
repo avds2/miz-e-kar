@@ -15,7 +15,9 @@ Read PROJECT-STATE.md, PRODUCT-SCOPE.md, PARITY-MATRIX.md, OPEN-QUESTIONS.md and
 
 ## Verification and publishing
 
-Document consistency audit passed: ten requested files; 87 unique requirement records with required fields; exhaustive roadmap allocation; 114 mapped source anchors; 24 referenced questions; local links/anchors; successful HTTP receipts. Manual review covered module retention, policy conflicts, source/claim distinctions and proposed-versus-approved choices. Git whitespace check passed for tracked changes; full staged check and publication are next. Commit/push/PR are still pending at this checkpoint. No merge or deployment is authorized in this phase.
+Document consistency audit passed: ten requested files; 87 unique requirement records with required fields; exhaustive roadmap allocation; 114 mapped source anchors; 24 referenced questions; local links/anchors; successful HTTP receipts. Manual review covered module retention, policy conflicts, source/claim distinctions and proposed-versus-approved choices. Full staged whitespace check passed. Final semantic review additionally retained free-workspace deletion eligibility, guest message-metadata/label restrictions, message pins, note text search and reference quota distinctions.
+
+Publication verified: discovery commit `95a5d2cdab516e73b461316bea24f856d063f42a` pushed on `docs/phase-0-discovery`; draft [PR #1](https://github.com/avds2/miz-e-kar/pull/1) opened against `main`. The PR is unmerged. This follow-up records those outcomes; the final head is obtained from `git log`/`git rev-parse HEAD` rather than embedding a self-referential commit hash. No merge or deployment is authorized in this phase.
 
 No application tests or UI acceptance checks for Miz-e Kar ran: no application exists. No reference onboarding/OTP/login submission, account creation, trial purchase, authenticated flow or tutorial playback was performed. No product feature can be marked complete.
 
