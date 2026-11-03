@@ -4,7 +4,9 @@
 
 1. Read `docs/PROJECT-STATE.md`, `docs/HANDOFF.md`, `docs/OPEN-QUESTIONS.md`, and the applicable requirements in `docs/PARITY-MATRIX.md` before every task. Inspect branch, status, existing instructions and current files; preserve unrelated work.
 2. Work in a bounded end-to-end slice. State the requirement IDs and acceptance criteria included, dependencies, and the remaining scope. An early core delivery never replaces the comprehensive web parity backlog.
-3. Phase 0 authorizes documentation and research only. Do not scaffold, install a stack, implement application code or deploy during Phase 0. Architecture and roadmap choices remain proposals until explicitly accepted in a later task. Do not interpret PR merge as stack approval unless the owner says so.
+3. Phase 0 authorizes documentation and research only. Do not scaffold, install a stack, implement application code or deploy during Phase 0. The owner explicitly approved Django/DRF + React/TypeScript with Vite + PostgreSQL as a modular monolith on 2026-11-03. Channels and Celery/Redis are planned, introduced only when an implemented slice needs them. Versions, RLS, commercial billing and production sizing remain unapproved. Do not interpret PR merge as approval of remaining proposals.
+
+4. Use `docs/P1A-SPEC.md` for the separately authorized first implementation slice. Classify questions by the earliest affected slice; do not block session/workspace foundations on task approval, category modeling, finance or meeting evidence. Keep unanswered questions open. Verify supported compatible versions against official sources when implementing; record pins, source dates and actual checks.
 
 ## Evidence and traceability
 

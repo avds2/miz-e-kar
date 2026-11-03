@@ -6,7 +6,13 @@ All source access dates are **2026-11-03**, inherited by every record below. `[H
 
 D = documented; O = directly observed; I = inferred/proposed engineering behavior; U = unknown. **No authenticated reference behavior is directly observed.** D applies to stated behavior, not unstated actor/error details. “Actor” combines actor, permission and preconditions; “Flow” contains action and observable result; “Edges” includes unresolved error behavior and cross-module effects. Acceptance criteria (AC) are proposed checks. Unknown policies require evidence before accepting implementation.
 
-**Every requirement is `Not implemented`; every test is `Planned, not created or run`.** These two fields apply to every record without exception. Stable test namespace: `TEST-<requirement-ID>-AC<n>`; split criteria into child IDs when implementing. Record actual test/browser paths, commit, results and remaining gaps here in future slices. All delivery phases are proposals, mapped in [Roadmap](ROADMAP.md); P1 foundations apply to every later phase. No item is deferred out of the full parity target.
+**Every requirement is `Not implemented`; every test is `Planned, not created or run`.** These two fields apply to every record without exception. Stable test namespace: `TEST-<requirement-ID>-AC<n>`; split criteria into child IDs when implementing. Record actual test/browser paths, commit, results and remaining gaps here in future slices. Delivery phases are planned starting milestones, mapped in [Roadmap](ROADMAP.md); P1 foundations apply to every later phase. Broad parents span multiple slices and later module entry points. No item is deferred out of the full parity target.
+
+## Phase 0.1 slice traceability
+
+All **87 parent IDs and acceptance criteria remain in the backlog**. [P1a](P1A-SPEC.md) defines eight slice acceptance IDs, mapped to explicit parent subsets; these are not new parent requirements or claims of reference observation. Completing a subset never completes its parent. At implementation, append actual test paths/results to that mapping; nothing is implemented or tested yet.
+
+P1a covers only locale/font display, synthetic session login/logout, workspace selection/membership isolation, PostgreSQL migrations/persistence and reproducible setup. Registration/SMS/recovery (MK-AUTH-001 and the remaining MK-AUTH-002 criteria), invitations, projects/tasks, files, notifications and realtime/job checks remain unfinished. Q06a/Q06b/Q06c, Q04, Q05, Q12 and Q22 do not block P1a. See [slice-specific question classification](OPEN-QUESTIONS.md).
 
 ## LOC
 
@@ -161,14 +167,14 @@ Evidence: **D** · Sources: [H012] [H110] [H112] [H113] · Reference plan: Advan
 
 ### MK-WS-005 — Guest module exceptions
 
-Evidence: **D** · Sources: [H111] [H114] · Reference plan: Advanced · Delivery: **P2**.
+Evidence: **D** · Sources: [H111] [H114] [H065] · Reference plan: Advanced · Delivery: **P2**.
 
 - **Actor / preconditions:** Guest with per-resource membership/grants.
 - **Flow / observable result:** Collaborate in invited projects/customer records, receive assigned tasks/letters, use personal notes.
-- **Fields / states / transitions:** Guest can receive task without project membership; CRM/sales/finance grants; no label creation anywhere or labels on notes; no message details/edit/forward/seen-list/copy/share controls.
+- **Fields / states / transitions:** Guest can receive a project-associated task without project membership (H065/H114; exact access details U); CRM/sales/finance grants; no label creation anywhere or labels on notes; no message details/edit/forward/seen-list/copy/share controls.
 - **Errors / edges / cross-effects:** No private chats with guests even for owner; guest cannot create customers; guest activity can be monitored by authorized managers.
 - **Acceptance criteria:** AC1: guest DM and print routes deny access. AC2: assigned task is accessible without exposing the project. AC3: message-metadata/edit/forward/share and label actions unavailable. Guest letters preserve hidden sender identity unless introduced.
-- **Open questions:** Q02 Q06; unspecified validation, permission details and failures remain U.
+- **Open questions:** Q02 Q06a Q06c; unspecified validation, permission details and failures remain U.
 
 <a id="mk-ws-006"></a>
 
@@ -228,14 +234,14 @@ Evidence: **D** · Sources: [H025] [H013] [H024] [H108] · Reference plan: All; 
 
 ### MK-PR-001 — Project creation and associated task category
 
-Evidence: **D** · Sources: [H041] [H042] [H008] · Reference plan: All; advanced creation policy · Delivery: **P1**.
+Evidence: **D** · Sources: [H041] [H042] [H008] [H065] [H114] · Reference plan: All; advanced creation policy · Delivery: **P1**.
 
 - **Actor / preconditions:** Member permitted to create projects; selected workspace users/guests.
 - **Flow / observable result:** Set title/color/avatar and members; create project and automatic task category.
 - **Fields / states / transitions:** Project, resource membership/manager role, category, activity feed.
-- **Errors / edges / cross-effects:** Project is required for normal task creation; standalone category and guest task exception unresolved.
+- **Errors / edges / cross-effects:** H065 documents project affiliation. H042 documents automatic category creation; category independence/cardinality remains Q06b. H114 is an access exception only, not projectless-task evidence.
 - **Acceptance criteria:** AC1: project/category created atomically and visible after reload. AC2: user without creation grant cannot create through API.
-- **Open questions:** Q06; unspecified validation, permission details and failures remain U.
+- **Open questions:** Q06a Q06b; unspecified validation, permission details and failures remain U.
 
 <a id="mk-pr-002"></a>
 
@@ -274,7 +280,7 @@ Evidence: **D** · Sources: [H063] [H046] [H044] · Reference plan: Both · Deli
 - **Fields / states / transitions:** Group title/color if evidenced later; project-group many-to-many; per-group counts.
 - **Errors / edges / cross-effects:** Not the same as project conversation or task category; grouping affects bulk access/report filtering.
 - **Acceptance criteria:** AC1: multi-group project appears under either matching group. AC2: ordinary actor cannot rename group titles.
-- **Open questions:** Q06; unspecified validation, permission details and failures remain U.
+- **Open questions:** Q06b; unspecified validation, permission details and failures remain U.
 
 <a id="mk-pr-005"></a>
 
@@ -287,7 +293,7 @@ Evidence: **D** · Sources: [H047] [H022] · Reference plan: Both; some fields a
 - **Fields / states / transitions:** Text, creator, assignee, status, tags, board list, customer, time range, form tracking number; created/updated/due/reminder sort.
 - **Errors / edges / cross-effects:** Task attachments separate from conversation files; forms capability not established.
 - **Acceptance criteria:** AC1: combined filters return correct fixtures. AC2: printed rows match authorized filtered results, including dates and delay.
-- **Open questions:** Q06 Q14; unspecified validation, permission details and failures remain U.
+- **Open questions:** Q06b Q14; unspecified validation, permission details and failures remain U.
 
 <a id="mk-pr-006"></a>
 
@@ -362,12 +368,12 @@ Evidence: **D** · Sources: [H058] [H020] · Reference plan: Advanced · Deliver
 
 Evidence: **D** · Sources: [H065] [H009] · Reference plan: Both; advanced fields gated · Delivery: **P1**.
 
-- **Actor / preconditions:** Permitted task creator; existing project, or verified guest exception for assignment.
+- **Actor / preconditions:** Permitted task creator; existing project required in documented creation flow. A guest assignee can lack project membership; that does not remove task-project affiliation.
 - **Flow / observable result:** Create through tray, project feed/list/board/calendar/Gantt, minutes, letter or customer; same task becomes visible in linked contexts.
 - **Fields / states / transitions:** Title, description, tags, checklist, attachments, reminder, assignees, project, board; optional publish-to-feed.
 - **Errors / edges / cross-effects:** Context supplies project or requires selection; no silent cross-workspace assignment. Later entry points delivered with their modules.
 - **Acceptance criteria:** AC1: initial project-to-assignee flow survives reload. AC2: linked entry points retain correct project and permissions.
-- **Open questions:** Q06; unspecified validation, permission details and failures remain U.
+- **Open questions:** Q06a Q06b; unspecified validation, permission details and failures remain U.
 
 <a id="mk-ta-002"></a>
 
@@ -393,7 +399,7 @@ Evidence: **D** · Sources: [H067] · Reference plan: Both; advanced editing pol
 - **Fields / states / transitions:** Editable fields; deleted/restored; membership in task category.
 - **Errors / edges / cross-effects:** Category creator/assignee/admin deletion rule; assignee needs category membership; recovery actor unclear.
 - **Acceptance criteria:** AC1: restricted editor denied. AC2: delete removes active item; authorized restore returns same task/history.
-- **Open questions:** Q02 Q06 Q07; unspecified validation, permission details and failures remain U.
+- **Open questions:** Q02 Q06b Q07; unspecified validation, permission details and failures remain U.
 
 <a id="mk-ta-004"></a>
 
@@ -510,7 +516,7 @@ Evidence: **D** · Sources: [H069] [H024] · Reference plan: Advanced · Deliver
 - **Fields / states / transitions:** Template fields, source project/category, active flag, new task ID.
 - **Errors / edges / cross-effects:** Current placement differs from old help; cross-project eligibility requires source membership.
 - **Acceptance criteria:** AC1: disabled template cannot be selected. AC2: instance edits do not mutate template. AC3: nonmember cannot use private-source template.
-- **Open questions:** Q06; unspecified validation, permission details and failures remain U.
+- **Open questions:** Q06b; unspecified validation, permission details and failures remain U.
 
 <a id="mk-ta-013"></a>
 
@@ -536,7 +542,7 @@ Evidence: **D** · Sources: [H064] [H016] · Reference plan: Both · Delivery: *
 - **Fields / states / transitions:** Today/delayed/current/untimed/future; creator/status/customer/time filters; daily grouping.
 - **Errors / edges / cross-effects:** Daily result timezone and visibility scope need verification.
 - **Acceptance criteria:** AC1: assigned and delegated fixtures appear in correct tabs. AC2: unauthorized coworkers do not leak through filters or print.
-- **Open questions:** Q06 Q08; unspecified validation, permission details and failures remain U.
+- **Open questions:** Q06b Q08; unspecified validation, permission details and failures remain U.
 
 <a id="mk-ta-015"></a>
 
@@ -698,7 +704,7 @@ Evidence: **D** · Sources: [H054] [H055] [H097] · Reference plan: Both · Deli
 - **Fields / states / transitions:** Minutes and linked resolution tasks; immutable prior revisions.
 - **Errors / edges / cross-effects:** Editing minutes does not edit resolution tasks; creation in customer conflicts with project-only wording.
 - **Acceptance criteria:** AC1: resolution becomes correctly assigned project task. AC2: content rollback preserves separately edited task.
-- **Open questions:** Q05 Q06; unspecified validation, permission details and failures remain U.
+- **Open questions:** Q05 Q06a Q06b; unspecified validation, permission details and failures remain U.
 
 <a id="mk-me-002"></a>
 
@@ -819,7 +825,7 @@ Evidence: **D** · Sources: [H096] [H097] [H022] · Reference plan: Both; featur
 - **Fields / states / transitions:** Activity feed, call direction/time, related project/task/minutes, reports unread/read.
 - **Errors / edges / cross-effects:** Call text editable only until read; guest activities constrained to visible identities; minutes project association unclear.
 - **Acceptance criteria:** AC1: call report conversion preserves text and links correct task/project. AC2: read report cannot be edited by ordinary author.
-- **Open questions:** Q06 Q21; unspecified validation, permission details and failures remain U.
+- **Open questions:** Q06a Q06b Q21; unspecified validation, permission details and failures remain U.
 
 <a id="mk-cr-004"></a>
 
@@ -912,7 +918,7 @@ Evidence: **D** · Sources: [H081] [H082] · Reference plan: Both · Delivery: *
 - **Fields / states / transitions:** Text formatting/lists/links; recipients; attached task; 100 MB file limit.
 - **Errors / edges / cross-effects:** Task attachment requires relevant project membership; private unnumbered letters not visible to broad admins.
 - **Acceptance criteria:** AC1: recipients receive same letter, outsider/admin nonrecipient cannot read it. AC2: attached task cannot bypass project rights.
-- **Open questions:** Q03 Q06; unspecified validation, permission details and failures remain U.
+- **Open questions:** Q03 Q06a; unspecified validation, permission details and failures remain U.
 
 <a id="mk-le-002"></a>
 

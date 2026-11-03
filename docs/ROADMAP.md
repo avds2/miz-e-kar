@@ -1,12 +1,12 @@
 # Roadmap
 
-**Proposed sequence; no implementation authorized by Phase 0.** Scope remains all 87 requirements, plus any newly evidenced web capability. Dates, staffing and effort are deliberately unset until baseline/access/team/scale decisions are answered. Dependencies describe order, not permission to proceed.
+**Planned sequence; no implementation authorized by Phase 0/0.1.** Scope remains all 87 requirements, plus any newly evidenced web capability. Dates, staffing and effort are deliberately unset until baseline/access/team/scale decisions are answered. Dependencies describe order, not permission to proceed.
 
 ## Phase 0 — evidence and planning (this PR)
 
 Inspect and preserve the repository; research accessible official sources; record requirements, conflicts and unknowns; compare architecture; create project records and reviewable branch/PR. Stop before scaffolding, dependency installation, application implementation or deployment.
 
-Next bounded task: obtain Q01/Q04 and core Q02 evidence, settle Q06 task/category/guest exceptions, and record owner architecture choice. Then a separately authorized P1 slice can begin. Do not wait for all distant-module evidence to design the initial policy boundaries.
+Phase 0.1 records the owner's core stack decision, splits Q06 into independent questions and specifies [P1a](P1A-SPEC.md). Next task: separately authorize implementation of P1a. No owner recording is needed to start those foundations; task approval, category and finance/meeting evidence is requested only before its affected slice.
 
 ## Incremental end-to-end deliveries
 
@@ -14,9 +14,24 @@ Each phase is a milestone composed of bounded PRs, not one giant change. Its req
 
 ## P1 — Working core and isolation
 
-Create account/workspace → invite/accept member → create project → assign task → recipient sees it → completes → creator sees result. Include Persian/Jalali/RD foundations, private attachment path, core notifications and negative workspace/role checks. This is the first working slice, not a scope cap.
+Create account/workspace → invite/accept member → create project → assign task → recipient sees it → completes → creator sees result. Include Persian/Jalali/RD foundations, private attachment path, core notifications and negative workspace/role checks. This is the first working milestone, not a scope cap.
 
-Dependencies: owner stack decision and verified core policy/data relationships. Use real persistence and two identities; provider-independent adapters may use explicit local test delivery, but that is not accepted SMS/email parity.
+Dependencies are per slice, not a gate on the whole milestone. The core stack is approved. Use real PostgreSQL persistence and two identities; synthetic/local delivery is not accepted registration/SMS/recovery parity. Project/category/guest questions do not block P1a.
+
+### P1 bounded slices
+
+| Slice | Reviewable result / parent subsets | Earliest evidence gate |
+| --- | --- | --- |
+| P1a | Reproducible core setup, independently branded Persian RTL shell/local RD, synthetic-account session login/logout, membership-filtered workspace selection; PostgreSQL migrations and two-user/two-workspace acceptance. See [P1a specification](P1A-SPEC.md). | No owner-evidence blocker; official version/compatibility checks and reproducible tool setup are implementation preflight. |
+| P1b | Workspace creation and regular-member membership lifecycle with existing accounts, invitation acceptance/cancel, removal/restoration. MK-WS-001/003 and relevant MK-WS-006 subsets. | Q02 for invitation/management actors; Q07 for any destructive workspace action (not included in this slice). No task evidence needed. |
+| P1c | Real registration/SMS verification, resend/recovery/login restrictions and external invitation delivery; finish relevant MK-AUTH-001/002 gaps. | Q10 provider/challenge/recovery behavior; Q01 for reference comparison. No final-approval/finance evidence needed. |
+| P1d | Project creation, project members and documented automatic task-category creation; minimal project list. MK-PR-001 subset. | Q02 project creation/management actors and Q06b category relationship. Q06a's documented project affiliation is retained. |
+| P1e | One project → one assigned task → personal tray → performer completion → creator sees persisted result; basic Jalali schedule and list. MK-TA-001/004/014, MK-PR-005 and MK-LOC-002 subsets. | Q02 task actions, Q06b if categories affect access, Q08 for included date semantics. Q04 final approval is outside this slice, not a gate. Guest access Q06c waits for P2. |
+| P1f | Private task attachments with authorized upload/download and failure handling; MK-SYS-001 subset. | Q16 file policy; Q12 quota enforcement only if commercial quotas are to be introduced. Unresolved billing cannot suppress advanced functionality. |
+| P1g | Core reminder/event delivery and notification history with recipient isolation; MK-SYS-003/MK-OPS-002 subsets. | Q10 delivery provider and Q13 event rules. Introduce Celery/Redis or Channels only when this slice actually needs jobs or realtime delivery. |
+| P1h | Remaining early dashboard, list/filter/print and feature-policy subsets with their workflows; keep later-module criteria open. | Q02/Q13 for included panels/grants; no dependency on finance/minutes not in this slice. |
+
+These are independently reviewable PR-sized contracts; split further if necessary rather than absorbing unrelated features. P1a can proceed while a provider-dependent P1c is blocked; P1d/P1e do not require P1c if using clearly identified synthetic fixtures. P1 as a milestone retains the full working core goal. Allocation below denotes where work starts; broad parents with later entry points remain incomplete until all criteria across modules pass.
 
 Allocated requirements (exhaustive):
 
@@ -180,5 +195,5 @@ Exit evidence: linked requirement-to-test results, relevant multi-user browser s
 
 - Preserve requirement IDs and all remaining backlog entries after every delivery. Split into child requirements where criteria become too broad; carry parent traceability forward.
 - An unavailable paid feature remains a named evidence/implementation gap. Do not replace it with a simpler feature and call it parity.
-- Deliberate changes such as secure guest activation, billing treatment or signature semantics need explicit owner decisions and a recorded parity difference. Proposals do not become decisions automatically.
+- Deliberate changes such as secure guest activation, billing treatment or signature semantics need explicit owner decisions and a recorded parity difference. The core stack decision is explicit; remaining proposals do not become decisions automatically. Commercial policy Q12 is unresolved separately from advanced functional scope.
 - Before final acceptance, repeat discovery against the chosen plan/build, inspect extra menus and reconcile release differences. A public-document inventory cannot alone establish comprehensive runtime parity.

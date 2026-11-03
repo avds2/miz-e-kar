@@ -1,50 +1,51 @@
-# Open questions and evidence requests
+# Open questions and slice gates
 
-No passwords, OTPs, cookies, tokens or unredacted customer content should be placed in repository files. Owner-provided evidence should use a disposable/reference workspace with synthetic data. This is an evidence checklist, not a request to bypass authentication. No owner evidence has been supplied yet.
+Updated 2026-11-03 for Phase 0.1. No authenticated owner recording has been supplied. Core stack approval is recorded in ARCHITECTURE-PROPOSAL.md; it is a decision, not an observation of Mizito. No passwords, OTPs, session cookies or real customer data belong in this repository.
 
-## Prioritized questions
+**P1a has no outstanding owner-evidence blocker.** It uses synthetic accounts, seeded memberships and documented independent-workspace behavior. Official dependency compatibility/support verification is an implementation preflight, not a reason to request task/finance/meeting recordings. Unknowns below stay open even when independent work proceeds. “Earliest gate” applies only to the stated action; it does not block an entire phase or its unrelated foundations.
 
-| ID | Unknown / decision needed | Smallest useful evidence or answer | Blocks |
+## Q06 split: affiliation, category and access
+
+Q06 remains a grouping/legacy alias; use its independent child questions in requirements and implementation work:
+
+| ID | Question / current evidence | Remaining unknown | Earliest genuine gate |
 | --- | --- | --- | --- |
-| Q01 | Which authenticated web build and plan is the parity baseline? | Screenshot showing plan and available version/build information, or explicitly state version unavailable. | Final reference baseline; does not stop public discovery. |
-| Q02 | Exact per-action workspace/project/group/guest grants; creator vs manager removal; Gantt view delegation. | Advanced permissions and project settings tabs; short owner/admin/member/guest comparison using same resource. | Policy schema and acceptance; WS/PR/GA/MON. |
-| Q03 | Personal/group/letter edit/delete rules, admin exceptions, paraph audience and forwarded history. | Send/read then attempt edit/delete with sender and participating admin; show forwarded letter recipient view. | CH/LE authorization. |
-| Q04 | One or multiple final approvers; waiting approval, rejection and reopen semantics. | One shared two-person task with final approval: performer ticks, approver finalizes and reopens. | Task state machine and tests. |
-| Q05 | Minutes actors, required fields, quorum denominator, absent/external attendees, signature representation and resolution dispatch. | Organizational minutes draft → attendance → request → signatures; include one absent participant and resulting tasks. | ME workflow; legal-signature scope decision. |
-| Q06 | Standalone task category vs project category; guest task outside project; customer minutes task project selection. | Categories tab/settings, a category task, and assigned nonmember guest opening a task. | Relational schema and private task grant. |
-| Q07 | Resource archive/delete/restore, free never-paid workspace deletion, memberships after recovery and task dispositions. | Both project archive choices plus owner project/task recovery; group/customer recovery screen. | Lifecycle and recovery. |
-| Q08 | Calendar view modes, timezone/holiday source, date-only deadlines, recurrence month ends and Gantt phase drag. | Calendar mode picker and recurrence dialog; one month-end schedule and phase drag. | Date adapter and scheduling semantics. |
-| Q09 | Preferred stack/team skills and acceptance of architecture proposal; RD weight/variant selection. | Owner decision on Django/React vs alternative and intended maintainers; choose regular RD unless another RD variant intended. | Stack selection; no dependencies installed yet. |
-| Q10 | SMS/email/push providers, OTP expiry/resend/lockout, recovery and guest activation security. | Provider availability/deployment restrictions; redacted security/notification dialogs, no codes. | Real onboarding and external delivery. |
-| Q11 | Target Debian version, hardware, users/concurrency/workspaces, expected files/data and network model; note scope. | Approximate expected deployment and whether Internet/air-gapped; note behavior across two workspaces. | Sizing, topology, backup/search choices. |
-| Q12 | Self-hosted plan/entitlement and billing behavior: full-feature internal deployment or commercial subscriptions? | Owner policy; plan/expiry/capacity screen and redacted invoice flow if commercial parity required. | Entitlement/payment adapter; retained in scope until decided. |
-| Q13 | Exact metrics, delays, counts, unread rules, notification channels and presence retention. | Small known fixture and its dashboard/project/member charts; notification preference/history screens. | Reports and event acceptance. |
-| Q14 | Forms referenced by tracking-number filters: first-class web module, add-on or integration? Any undocumented menus? | Open filter and linked form screen; screenshot of expanded menus/settings. | Additional module discovery; no form builder assumed. |
-| Q15 | Import samples and error/partial/retry behavior; copy field set and task transfer cross-effects. | Empty official CSV/Excel templates, one failed import preview and task/project copy/move dialogs. | Import/copy atomicity and tests. |
-| Q16 | File types/quota/limits, forwarding ownership and upload/recording failure behavior. | Upload/forward dialog, current quota screen and oversize response with synthetic file. | Storage API and recovery. |
-| Q17 | Search coverage, normalization/ranking, bookmark scope and assistant commands. | One Persian query with mixed Arabic letters/digits plus result opening and command help. | Search/assistant acceptance. |
-| Q18 | Poll retraction/closing actors, anonymous result policy, quiz scoring/print and templates. | One anonymous multi-question quiz with respondent and admin results. | Poll correctness and privacy. |
-| Q19 | Experimental meeting availability/provider/network/device constraints and guest admission. | Two-browser call with screen sharing and denied-device state; state reference plan/build. | Media service evaluation. |
-| Q20 | Gantt dependency cycles, date changes, zoom, phase drag and read-only grants. | Dependent tasks with overlap and cycle attempt; viewer attempts edit. | Gantt domain rules. |
-| Q21 | CRM create/edit/print scope, duplicate phone behavior, basic print fields and label logic. | Synthetic customer/representatives, duplicate warning, print and multi-label filter. | CRM validation and ACL. |
-| Q22 | Currency/rial/toman, precision, financial void/refund/edit rules, sales stages/close dates and forecast buckets. | One probable/overdue/realized/void document and one opportunity with resulting tables. | Finance/sales calculations. |
-| Q23 | Registry numbering actor, independent sequence key, corrections and concurrent behavior. | Incoming/outgoing registration dialogs with two numbering series and duplicate attempt. | Letter numbering and uniqueness. |
-| Q24 | Availability/RPO/RTO, backup retention/location, privacy/purge policies and operational owner. | Owner targets and retention decisions, including note purge versus retained backups/presence history. | Production readiness and recovery plan. |
+| Q06a | Does a task belong to a project? **D:** H065 explicitly requires a project when creating a task, including customer follow-up. | All hidden creation paths and database cardinality are not observed. No projectless task is established. | P1e may implement the documented project-bound flow; evidence needed before any alternative projectless path or broader schema claim. No P1a gate. |
+| Q06b | How does a task category relate to a project? **D:** H042 auto-creates a category with a project; H067 mentions category membership; H069/H024 describe template/settings contexts. | Identity versus grouping, cardinality, independent creation and membership lifecycle remain **U**. “Standalone category” was an unverified interpretation. | P1d category model/automatic creation and later category-aware task access. Capture categories/settings and their project link. No P1a gate. |
+| Q06c | Can an assigned guest access a task without project membership? **D:** H114 explicitly permits this assignment. | Exact guest-visible fields/reports, changes after revocation and related project/customer access remain **U**. It does not imply the task lacks a project. | P2 guest task-access slice, before granting related-resource visibility. No P1a/P1d ordinary-member gate. |
 
-## Minimum request for the next slice
+Five existing source URLs H042/H065/H067/H069/H114 were re-fetched (HTTP 200) on 2026-11-03; H024 was reread from the prior capture. See the [targeted recheck](REFERENCE-SOURCES.md). This is documentation evidence, not authenticated verification.
 
-First send **one redacted plan/build screenshot and a 2–3 minute recording of a shared task with final approver**: show project advanced permission settings, performer completion, approver completion and reopen. This resolves Q01/Q04 and part of Q02 using synthetic names. No credentials or access to the owner's account are needed. If recording is unavailable, the equivalent five screenshots are sufficient.
+## Remaining questions classified by earliest affected slice
 
-## Follow-up capture checklist (only when its module is next)
+| ID | Open issue / current status | Earliest genuine gate; unaffected work | Minimum evidence or decision at that point |
+| --- | --- | --- | --- |
+| Q01 | Reference authenticated plan/build unknown. | P1b/P1c reference comparison and final P7 parity baseline; does not block P1a engineering acceptance. | Redacted plan/build label, or explicit version-unavailable note. |
+| Q02 | Action-specific workspace/project/group/guest policies remain partially unknown. Basic active membership isolation is documented. | P1b invitation/management actors first; project creation in P1d, task actions in P1e, guest/Gantt/monitoring later. No gate on P1a member-only workspace reads. | Capture only the actor/action settings needed by the next slice. |
+| Q03 | Read-dependent chat/letter/paraph edit/delete and forward audience. | P3 chat rules; letter-specific part P5. No authentication/workspace gate. | Sender/reader/participating-admin before/after-read results. |
+| Q04 | Final approver count, pending/rejection/reopen semantics. | P2 final-approval slice. No P1a or ordinary single-performer P1e gate. | One shared approval task lifecycle when that slice is next. |
+| Q05 | Minutes actors/quorum/absentees/external invitees/signature representation. | P4 minutes/signature/resolution dispatch. | One organizational minutes lifecycle and confirmed electorate. |
+| Q07 | Archive/delete/restore semantics, including free never-paid workspace deletion. | P2 resource lifecycle/destructive workspace actions; not P1a read/select nor P1b's documented member restoration. | The specific archive/delete/recovery dialog; avoid unrelated resource captures. |
+| Q08 | Calendar views/timezone/holidays/date-only/recurrence boundaries. | P1e included scheduling semantics first; P2 recurrence and P4 Gantt afterward. RTL/login shell is independent. | Schedule/date controls for the included flow; boundary fixtures. |
+| Q09 | **Core stack choice decided:** Django/DRF + React/TypeScript/Vite + PostgreSQL modular monolith. Versions, licenses, remaining architecture details and maintainer constraints stay open. | P1a engineering preflight verifies official support/compatibility and pins; no further owner stack choice or RD approval is required. RLS/production choices deferred. | Official sources and dated compatibility record; existing verified RD Regular is usable, verify each bundled artifact. |
+| Q10 | SMS/email/push providers and OTP/recovery/guest activation details. | P1c real registration/recovery/delivery; P1g external notification channels. Synthetic session login/logout needs none. | Provider availability and challenge/resend/recovery rules, without secrets. |
+| Q11 | Target Debian/hardware/load/storage/network model; account-wide vs workspace note scope. | P3 note scope; P7 sizing/topology. Reproducible local P1a PostgreSQL setup does not need production estimates. | Note behavior in two workspaces when relevant; production estimates before sizing. |
+| Q12 | Commercial subscriptions, quotas, billing and entitlement policy undecided. | P6 commercial administration or any earlier slice explicitly adding commercial enforcement. Never a gate on advanced functional scope or P1a. | Owner chooses internal full-feature use versus commercial subscriptions; no reference limit becomes a product default automatically. |
+| Q13 | Exact event/reminder/count/unread/presence/report semantics. | P1g core events/reminders first; P1h dashboard, later P3/P6 details. No P1a gate. | Known fixture and only the next affected event/panel. |
+| Q14 | Form-tracking references may be module/add-on/integration. | P6 additional-surface investigation; no inferred form builder. | Tracking filter and linked screen if present. |
+| Q15 | Copy/move/import fields, errors, partial completion and retry semantics. | P2 task copy/move; P6 bulk import/copy. | Specific copy/move dialog or blank import template and failed preview. |
+| Q16 | File-type/size/quota/forwarding/error rules. | P1f private attachment flow; later P3 recording/forwarding. No shell/font gate: static licensed font is not a user upload. | One upload/error screen and current limits. |
+| Q17 | Search coverage/normalization/ranking/bookmarks/assistant commands. | P3 search/assistant. | One synthetic Persian search and result opening. |
+| Q18 | Poll closing/retraction/confidentiality/scoring/templates. | P3 polls/quiz slice. | One anonymous quiz respondent/admin comparison. |
+| Q19 | Online meeting availability/media/provider/device/network/guest rules. | P6 media evaluation. | Two-browser call/device denial when relevant. |
+| Q20 | Gantt cycles/date propagation/scales/phase drag/view grants. | P4 Gantt. | Dependency and read-only interaction evidence. |
+| Q21 | Customer action/print permissions, duplicate phone and filters. | P5 CRM. | Synthetic customer, duplicate warning and print fields. |
+| Q22 | Currency/precision/finance states/voids/sales stages/forecast buckets. | P5 finance/sales. No authentication or workspace gate. | One monetary lifecycle and resulting forecast/report. |
+| Q23 | Registry numbering actors/series/corrections/concurrency. | P5 registry. | Two series and duplicate registration attempt. |
+| Q24 | Recovery/retention/privacy/purge/presence policies and operator targets. | P3 note purge/retention first; P6 presence and P7 recovery qualification. No production sizing gate on P1a dev migrations. | Retention decision for included module; RPO/RTO before production qualification. |
 
-1. Workspace settings: member/invite/deleted tabs, guest visibility, feature grants and owner repair dialogs (Q02/Q07/Q12).
-2. Project/category: all advanced tabs, task categories, board settings, both calendars, archive modes, copy/import samples (Q06/Q08/Q15).
-3. Conversations/assistant: before/after-read actions, voice/file controls, search, mentions/unread, bookmarks, anonymous quiz (Q03/Q16/Q17/Q18).
-4. Gantt: view/edit delegation, phases, overlapping dependencies, cycle attempt, phase drag, zoom/print (Q02/Q20).
-5. Minutes: role fields, draft/attendance/signing states, absent attendee, task dispatch and template (Q05).
-6. CRM/sales/finance: customer members/representatives, call conversion, print, opportunity and each money state with monthly report (Q21/Q22).
-7. Letters: unread/read sender/admin actions, paraph recipients/forward, registry numbering and customer link seen by a nonrecipient (Q03/Q23).
-8. Monitoring/settings: known-count fixtures, member online history, restricted monitor, notices/mute/sessions/theme and any extra menus (Q10/Q13/Q14).
-9. Online meeting: two participants and device denial/screen sharing (Q19).
+## Evidence checklist for the next affected workflows only
 
-Record role, plan/build, browser and approximate recording date with each item. Mask real phone numbers and business content; omit login/OTP/password screens. Public tutorial text was reviewed, but video playback was not; an owner recording should resolve current behavior rather than reproduce marketing demonstrations.
+- **P1a:** no owner recording or credentials needed. The implementation agent supplies its own two-user/two-workspace browser and direct-API evidence, dependency verification and migration/reload results. These are Miz-e Kar acceptance checks, not new Mizito observations.
+- **Before P1b:** one redacted plan/build image if available; show the actor's member-management role and invite/accept, remove/restore controls for a synthetic regular member. A short recording or equivalent screenshots with actor/action/result is enough. Do not include login, passwords or OTPs.
+- **If owner evidence is unavailable:** P1a can proceed under a separate implementation task. Unverified P1b actor boundaries remain open; implement only supported documented behavior or defer the affected action with an explicit gap. Do not guess permissions. Q06b category design waits for its targeted category/project evidence in P1d; Q06c guest visibility waits for P2. No final-approval, finance or minutes capture is requested for P1a.
